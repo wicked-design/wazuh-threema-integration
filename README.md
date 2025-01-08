@@ -19,15 +19,18 @@ You can customize the integration to send alerts based on levels, rule IDs or gr
 > [!NOTE]  
 > Currently the `<api_key>` field is not used. The secret for the Threema Gateway integration is stored in the integrations script itself.  
 
+# Dynamic recipient, sender and secrets
 > [!NOTE]  
 > The  `<api_key>` field could be used to further customize the integration of the Threema Gateway by using specific Threema recpient IDs based on each alert.
-> For this one could put `<api_key>THREEMA_RECIPIENT_ID:*THREEMA_SENDER_ID:SECRET</api_key>`.
-> In the integration script the `<api_key>` argument could be used like this:
-> ```
->        credentials = sys.argv[2].split(`:`)
->        if len(credentials) != 3:
->            logging.error("Invalid credential format")
->            sys.exit(1)
->
->        threema_ID, threema_GW_ID, threema_secret = credentials
-> ```
+
+In order to dynamically use different recipients, senders and secrets one could use `<api_key>THREEMA_RECIPIENT_ID:*THREEMA_SENDER_ID:SECRET</api_key>` in `/var/ossec/etc/ossec.conf`.
+
+In the integration script the `<api_key>` argument could be used like this:
+```
+        credentials = sys.argv[2].split(`:`)
+        if len(credentials) != 3:
+            logging.error("Invalid credential format")
+            sys.exit(1)
+
+        threema_ID, threema_GW_ID, threema_secret = credentials
+```
