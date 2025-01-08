@@ -12,7 +12,7 @@ The integration is based on the official [Wazuh integration guide](https://docum
 # Implementation
 The integration is done in two parts:
 ## The integration script
-The script is stored in /var/ossec/integrations
+The [script](https://github.com/wicked-design/wazuh-threema-integration/blob/main/threema-integration) is stored in /var/ossec/integrations
 ## The configuration
 The main config file /var/ossec/etc/ossec.conf is used to configure the integration. 
 You can customize the integration to send alerts based on levels, rule IDs or groups. 
