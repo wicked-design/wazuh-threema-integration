@@ -1,0 +1,56 @@
+#!/usr/bin/env python
+
+import sys
+import json
+import requests
+
+import logging
+
+# Read configuration parameters from command-line arguments
+alert_file_path = sys.argv[1]
+#user = sys.argv[2].split(':')[0]
+#api_key = sys.argv[2].split(':')[1]
+hook_url = sys.argv[3]
+
+# Debug
+print('Threema:' + hook_url)
+print("Argument List:", str(sys.argv))
+
+# Read the alert file and parse its contents as JSON
+with open(alert_file_path) as alert_file:
+    alert_json = json.load(alert_file)
+
+# Extract relevant fields from the alert JSON
+alert_level = alert_json['rule']['level']
+rule_id = alert_json['rule']['id']
+description = alert_json['rule']['description']
+agent_id = alert_json['agent']['id']
+agent_name = alert_json['agent']['name']
+#path = alert_json['syscheck']['path']
+
+# Set project attributes (needs manual configuration)
+# Enter the details of your Threema Gateway
+threema_ID = 'xxxxxxx'
+threema_GW_ID = 'xxxxxxx'
+threema_secret = 'xxxxxxx'
+
+# Construct the payload as x-www-form-urlencoded
+payload = {
+        'to': threema_ID,
+        'text': '- State: ' + description + '\n- Rule ID: ' + str(rule_id) + '\n- Alert level: ' + st>
+        'from': threema_GW_ID,
+        'secret': threema_secret
+}
+
+headers = {
+    'accept': '*/*',
+    'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+}
+
+print("Payload:", str(payload))
+print("Headers:", str(headers))
+# Send the HTTP POST request to create the issue using the webhook
+response = requests.post(hook_url, headers=headers, data=payload, timeout=10)
+
+# Exit with status code 0 (success)
+sys.exit(0)
