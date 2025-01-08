@@ -20,8 +20,9 @@ You can customize the integration to send alerts based on levels, rule IDs or gr
 > Currently the `<api_key>` field is not used. The secret for the Threema Gateway integration is stored in the integrations script itself.  
 
 # Dynamic recipient, sender and secrets
-> [!NOTE]  
+> [!TIP]  
 > The  `<api_key>` field could be used to further customize the integration of the Threema Gateway by using specific Threema recpient IDs based on each alert.
+> This could be used to send messages to different recipients based on the severity of an alert or based on a rule ID or rule group. 
 
 In order to dynamically use different recipients, senders and secrets one could use `<api_key>THREEMA_RECIPIENT_ID:*THREEMA_SENDER_ID:SECRET</api_key>` in `/var/ossec/etc/ossec.conf`.
 
